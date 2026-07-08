@@ -32,6 +32,8 @@
 <html>
     <head>
         <title>Changer de département</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../design/theme-minimal/style.css">
     </head>
     <body>
     <p><a href="fiche.php?emp_no=<?= urlencode($emp_no) ?>">&larr; Retour à la fiche</a></p>

@@ -1,31 +1,35 @@
 <?php
-    include('../inc/functions.php');
+include('../inc/functions.php');
 
-    // $_GET['dept_no'] = valeur du paramètre passé dans l'URL (ex. employees.php?dept_no=d009).
-    // ?? est l'opérateur de "coalescence des nuls" (null coalescing operator, PHP 7+).
-    // Il signifie : "prends $_GET['dept_no'] s'il EXISTE et n'est PAS null, sinon prends ''".
-    // Cela évite un warning "Undefined array key" si l'URL ne contient pas le paramètre.
-    // Équivaut à : isset($_GET['dept_no']) ? $_GET['dept_no'] : ''
-    $dept_no = $_GET['dept_no'] ?? '';
-    $department = get_one_department($dept_no);
+// $_GET['dept_no'] = valeur du paramètre passé dans l'URL (ex. employees.php?dept_no=d009).
+// ?? est l'opérateur de "coalescence des nuls" (null coalescing operator, PHP 7+).
+// Il signifie : "prends $_GET['dept_no'] s'il EXISTE et n'est PAS null, sinon prends ''".
+// Cela évite un warning "Undefined array key" si l'URL ne contient pas le paramètre.
+// Équivaut à : isset($_GET['dept_no']) ? $_GET['dept_no'] : ''
+$dept_no = $_GET['dept_no'] ?? '';
+$department = get_one_department($dept_no);
 
-    // --- Pagination ---
-    $par_page = 20;
-    // Numéro de page courant (1 minimum), récupéré dans l'URL
-    $page = max(1, (int)($_GET['page'] ?? 1));
-    // OFFSET = nombre de lignes à sauter avant de commencer
-    $offset = ($page - 1) * $par_page;
+// --- Pagination ---
+$par_page = 20;
+// Numéro de page courant (1 minimum), récupéré dans l'URL
+$page = max(1, (int) ($_GET['page'] ?? 1));
+// OFFSET = nombre de lignes à sauter avant de commencer
+$offset = ($page - 1) * $par_page;
 
-    $total = count_employees_by_department($dept_no);     // nombre total d'employés
-    $nb_pages = (int)ceil($total / $par_page);            // nombre total de pages
+$total = count_employees_by_department($dept_no);     // nombre total d'employés
+$nb_pages = (int) ceil($total / $par_page);            // nombre total de pages
 
-    $employees = get_employees_by_department($dept_no, $par_page, $offset);
+$employees = get_employees_by_department($dept_no, $par_page, $offset);
 ?>
 <html>
-    <head>
-        <title>Employés du département</title>
-    </head>
-    <body>
+
+<head>
+    <title>Employés du département</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../design/theme-minimal/style.css">
+</head>
+
+<body>
     <p><a href="index.php">&larr; Retour aux départements</a></p>
 
     <?php if (!$department) { ?>
@@ -63,5 +67,6 @@
         </p>
         <p><?= $total ?> employé(s) au total dans ce département.</p>
     <?php } ?>
-    </body>
+</body>
+
 </html>

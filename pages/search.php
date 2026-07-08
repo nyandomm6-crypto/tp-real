@@ -1,23 +1,27 @@
 <?php
-    include('../inc/functions.php');
+include('../inc/functions.php');
 
-    $departments = get_all_departments();
+$departments = get_all_departments();
 
-    // Récupération des critères (?? '' évite le warning si le champ est absent)
-    $dept_no = $_GET['dept_no'] ?? '';
-    $name    = $_GET['name']    ?? '';
-    $age_min = $_GET['age_min'] ?? '';
-    $age_max = $_GET['age_max'] ?? '';
+// Récupération des critères (?? '' évite le warning si le champ est absent)
+$dept_no = $_GET['dept_no'] ?? '';
+$name = $_GET['name'] ?? '';
+$age_min = $_GET['age_min'] ?? '';
+$age_max = $_GET['age_max'] ?? '';
 
-    // On ne lance la recherche que si le formulaire a été soumis
-    $submitted = isset($_GET['dept_no']);
-    $results   = $submitted ? search_employees($dept_no, $name, $age_min, $age_max) : array();
+// On ne lance la recherche que si le formulaire a été soumis
+$submitted = isset($_GET['dept_no']);
+$results = $submitted ? search_employees($dept_no, $name, $age_min, $age_max) : array();
 ?>
 <html>
-    <head>
-        <title>Recherche d'employés</title>
-    </head>
-    <body>
+
+<head>
+    <title>Recherche d'employés</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../design/theme-minimal/style.css">
+</head>
+
+<body>
     <p><a href="index.php">&larr; Retour aux départements</a></p>
     <h1>Recherche d'employés</h1>
 
@@ -62,5 +66,6 @@
             <?php } ?>
         </table>
     <?php } ?>
-    </body>
+</body>
+
 </html>

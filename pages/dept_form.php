@@ -36,6 +36,8 @@
 <html>
     <head>
         <title><?= $editing ? "Modifier" : "Ajouter" ?> un département</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../design/theme-minimal/style.css">
     </head>
     <body>
     <p><a href="index.php">&larr; Retour aux départements</a></p>
